@@ -5,3 +5,4 @@ if [ ! -d "src/top/libs/mininet-wifi" ]; then
     git clone https://github.com/intrig-unicamp/mininet-wifi.git
 fi
 mv mininet-wifi src/top/libs/mininet-wifi
+sudo util/install.sh -Wln
