@@ -17,7 +17,7 @@ An intelligent Wi-Fi project in a startup model environment that will use multip
 ## Installation :
 
 1. Open your terminal and type ; `git clone https://github.com/flimple/wifi-intelligent-mininet`
-2. Then use `./install_deps.sh` to check the installation of requirements and dependencies.
+2. Then use `./install_deps.sh` inside your installed folder to check the installation of requirements and dependencies.
 
 ## Built with :
 
