@@ -8,7 +8,7 @@ local_mn_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'libs', 
 if local_mn_path not in sys.path:
     sys.path.insert(0, local_mn_path)
 
-from mininet.node import Controller, OVSSwitch
+from mininet.node import Controller, OVSController
 # Change controller=Controller to use RemoteController or UserSpaceController if needed
 from mininet.log import setLogLevel, info
 from mn_wifi.node import OVSKernelAP
@@ -16,7 +16,7 @@ from mn_wifi.net import Mininet_wifi
 from mn_wifi.cli import CLI
 
 def custom_topology():
-    net = Mininet_wifi(controller=Controller, accessPoint=OVSKernelAP)
+    net = Mininet_wifi(controller=OVSController, accessPoint=OVSKernelAP)
 
     info("*** Adding controller\n")
     c0 = net.addController('c0')
