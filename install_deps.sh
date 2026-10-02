@@ -2,6 +2,7 @@
 sudo apt update
 # numpy meta data gen error fix
 sudo apt install python3-dev gfortran build-essential
+sudo apt install -y openflow-controller
 sudo apt install -y git python3-pip openvswitch-switch
 # Check if the mininet directory exists, if not install it
 if [ ! -d "src/top/libs/mininet-wifi" ]; then
