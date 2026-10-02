@@ -21,7 +21,7 @@ def custom_topology():
     info("*** Adding controller\n")
 
     info("*** Adding access points and stations\n")
-    ap1 = net.addAccessPoint('ap1', ssid='wifi-ssid-1', mode='g', channel='1', position='300,300,0')
+    ap1 = net.addAccessPoint('ap1', ssid='wifi-ssid-1', mode='g', channel='1', position='100,100,0')
     sta1 = net.addStation('sta1', ip='10.0.0.1', position='400,30,0')
     sta2 = net.addStation('sta2', ip='10.0.0.2', position='90,30,0')
 
