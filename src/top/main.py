@@ -16,10 +16,9 @@ from mn_wifi.net import Mininet_wifi
 from mn_wifi.cli import CLI
 
 def custom_topology():
-    net = Mininet_wifi(controller=OVSController, accessPoint=OVSKernelAP)
+    net = Mininet_wifi(accessPoint=OVSKernelAP)
 
     info("*** Adding controller\n")
-    c0 = net.addController('c0')
 
     info("*** Adding access points and stations\n")
     ap1 = net.addAccessPoint('ap1', ssid='wifi-ssid-1', mode='g', channel='1', position='300,300,0')
@@ -38,8 +37,6 @@ def custom_topology():
 
     info("*** Starting network\n")
     net.build()
-    c0.start()
-    ap1.start([c0])
 
     info("*** Running CLI\n")
     CLI(net)
