@@ -8,7 +8,8 @@ local_mn_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'libs', 
 if local_mn_path not in sys.path:
     sys.path.insert(0, local_mn_path)
 
-from mininet.node import Controller
+from mininet.node import Controller, OVSSwitch
+# Change controller=Controller to use RemoteController or UserSpaceController if needed
 from mininet.log import setLogLevel, info
 from mn_wifi.node import OVSKernelAP
 from mn_wifi.net import Mininet_wifi
