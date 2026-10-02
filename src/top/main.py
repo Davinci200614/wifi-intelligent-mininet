@@ -104,13 +104,13 @@ def build_mobility(net, stas):
 
 def print_help():
     info("\n*** Useful CLI commands:\n"
-         "    sta1 ping -c3 sta2                     test connectivity\n"
-         "    pingall                                ping every node\n"
+         "    sta1 ping -c3 sta2                    test connectivity\n"
+         "    pingall                               ping every node\n"
          "    sta1 iw dev sta1-wlan0 link            show association / signal\n"
-         "    py sta1.setPosition('400,300,0')       move a station live\n"
-         "    py ap1.params['range'] = 150           change AP range variable live\n"
-         "    py sta1.wintfs[0].rssi                 read station RSSI\n"
-         "    exit                                   stop the simulation\n\n")
+         "    py sta1.setPosition('400,300,0')      move a station live\n"
+         "    py exec(\"ap1.params['range'] = 150\")  change AP range variable live\n"
+         "    py sta1.wintfs[0].rssi                read station RSSI\n"
+         "    exit                                  stop the simulation\n\n")
 
 
 def custom_topology():
