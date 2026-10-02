@@ -8,38 +8,30 @@ local_mn_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'libs', 
 if local_mn_path not in sys.path:
     sys.path.insert(0, local_mn_path)
 
-from mininet.node import Controller
 from mininet.log import setLogLevel, info
 from mn_wifi.node import OVSKernelAP
 from mn_wifi.net import Mininet_wifi
 from mn_wifi.cli import CLI
 
 # ==================== CONFIGURATION VARIABLES ====================
-# Access Point Settings
 AP_SSID = 'wifi-ssid-1'
 AP_MODE = 'g'
 AP_CHANNEL = '1'
 AP_POSITION = '300,300,0'
-AP_RANGE = 150  # Transmission range in meters/units
+AP_RANGE = 150
 
-# Station 1 Settings
 STA1_IP = '10.0.0.1'
 STA1_POSITION = '30,30,0'
 
-# Station 2 Settings
 STA2_IP = '10.0.0.2'
 STA2_POSITION = '90,30,0'
 
-# Graphical Visualizer Boundary Settings
 CANVAS_MAX_X = 1000
 CANVAS_MAX_Y = 1000
 # =================================================================
 
 def custom_topology():
-    net = Mininet_wifi(controller=Controller, accessPoint=OVSKernelAP)
-
-    info("*** Adding controller\n")
-    c0 = net.addController('c0')
+    net = Mininet_wifi(accessPoint=OVSKernelAP)
 
     info("*** Adding access points and stations\n")
     ap1 = net.addAccessPoint(
@@ -65,8 +57,7 @@ def custom_topology():
 
     info("*** Starting network\n")
     net.build()
-    c0.start()
-    ap1.start([c0])
+    ap1.start([])
 
     info("*** Running CLI\n")
     CLI(net)
