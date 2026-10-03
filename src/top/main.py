@@ -7,6 +7,21 @@ Run:  sudo python3 wifi_test.py
 GUI needs matplotlib:  sudo apt install python3-matplotlib
 """
 import shutil
+import time
+
+# --- GUI fix: newer matplotlib (>= 3.6) removed canvas.set_window_title(),
+# which older Mininet-WiFi still calls -> "Something went wrong with the GUI".
+# Put the method back so the plot works with any matplotlib version.
+try:
+    from matplotlib.backend_bases import FigureCanvasBase
+    if not hasattr(FigureCanvasBase, 'set_window_title'):
+        def _set_window_title(self, title):
+            if getattr(self, 'manager', None):
+                self.manager.set_window_title(title)
+        FigureCanvasBase.set_window_title = _set_window_title
+except ImportError:
+    pass
+
 from mininet.log import setLogLevel, info
 from mininet.node import Controller, OVSController, RemoteController
 from mn_wifi.net import Mininet_wifi
@@ -42,6 +57,7 @@ def topology():
     net.configureNodes() if hasattr(net, 'configureNodes') else net.configureWifiNodes()
 
     info('*** Creating links\n')
+    net.addLink(sta1, ap1)   # associate sta1 with ap1 explicitly
     net.addLink(ap1, h1)
 
     info('*** Opening GUI (live map of ap1 range and sta1 position)\n')
@@ -51,6 +67,10 @@ def topology():
     net.build()
     c0.start()
     ap1.start([c0])
+
+    info('*** Waiting for sta1 to associate...\n')
+    time.sleep(3)
+    info(sta1.cmd('iw dev sta1-wlan0 link'))
 
     info('*** Testing connectivity (sta1 <-> h1)\n')
     net.pingAll()
