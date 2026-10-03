@@ -3,6 +3,7 @@ sudo apt update
 
 # numpy meta data gen error fix
 sudo apt install python3-dev gfortran build-essential
+sudo apt install -y openflow-controller
 sudo apt install -y git python3-pip openvswitch-switch
 
 # Controller in path fix
