@@ -4,6 +4,7 @@ Simple Mininet-WiFi test: 1 controller (c0), 1 access point (ap1), 1 station (st
 A wired host (h1) is plugged into ap1 so sta1 has something to ping.
 
 Run:  sudo python3 wifi_test.py
+GUI needs matplotlib:  sudo apt install python3-matplotlib
 """
 import shutil
 from mininet.log import setLogLevel, info
@@ -33,8 +34,8 @@ def topology():
     info('*** Creating nodes\n')
     c0 = add_controller(net)
     ap1 = net.addAccessPoint('ap1', ssid='test-ssid', mode='g', channel='1',
-                             position='30,30,0')
-    sta1 = net.addStation('sta1', ip='10.0.0.1/8', position='20,30,0')
+                             position='50,50,0', range=30)
+    sta1 = net.addStation('sta1', ip='10.0.0.1/8', position='40,50,0')
     h1 = net.addHost('h1', ip='10.0.0.2/8')
 
     info('*** Configuring WiFi nodes\n')
@@ -42,6 +43,9 @@ def topology():
 
     info('*** Creating links\n')
     net.addLink(ap1, h1)
+
+    info('*** Opening GUI (live map of ap1 range and sta1 position)\n')
+    net.plotGraph(max_x=100, max_y=100)
 
     info('*** Starting network\n')
     net.build()
